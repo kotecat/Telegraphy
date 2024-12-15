@@ -5,11 +5,13 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi.errors import RateLimitExceeded
 from starlette.responses import JSONResponse
+from sqlalchemy import select
 
 from src.api.routes import api, frontend
 from src.config import app_config
 from src.repository.database import async_db
-from src.models.entities import Base
+from src.models.entities import Base, Account
+from src.repository import crud
 
 
 logging.basicConfig(level=app_config.LOGGING_LEVEL)
@@ -17,8 +19,26 @@ logger = logging.getLogger(__name__)
 
 
 async def on_startup() -> None:
-    async with async_db.async_engine.begin() as conn:
-        ...
+    async with async_db.async_session() as db:
+        logger.info("Getting admin token...")
+        r = await db.execute(
+            select(Account)
+            .where(Account.is_admin == True)
+            .limit(1)
+        )
+        
+        acc = r.scalars().one_or_none()
+        if not acc:
+            logger.info("Creating new Admin")
+            acc = await crud.create_account(db, "Admin", "Admin", "...")
+            acc.is_admin = True
+            await db.commit()
+            await db.refresh(acc)
+            
+        logger.info("\n")
+        logger.info("=-=-=-=-=-=-=")
+        logger.info(f"ADMIN TOKEN: {acc.token}")
+        logger.info("=-=-=-=-=-=-=\n")
 
 
 def init_application() -> FastAPI:

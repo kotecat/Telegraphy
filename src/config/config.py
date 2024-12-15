@@ -3,12 +3,11 @@ import logging
 from typing import List
 
 import decouple
-import pydantic_settings
 
 ROOT_DIR: pathlib.Path = pathlib.Path(__file__).parent.parent.resolve()
 
 
-class AppConfig(pydantic_settings.BaseSettings):
+class AppConfig:
     
     # meta info
     TITLE: str = "Telegraphy"
@@ -46,9 +45,11 @@ class AppConfig(pydantic_settings.BaseSettings):
     LIMIT_GET_PAGES: str = decouple.config("LIMIT_GET_PAGES", "500/second", cast=str)
     
     # etc
-    LOGGING_LEVEL: int = logging.getLevelNamesMapping()[(
-        decouple.config("LOGGING_LEVEL", "INFO", cast=str).upper()
-    )]
+    LOGGING_LEVEL: int = getattr(
+        logging, 
+        decouple.config("LOGGING_LEVEL", "INFO", cast=str).upper(), 
+        logging.INFO
+    )
 
 
 app_config = AppConfig()
