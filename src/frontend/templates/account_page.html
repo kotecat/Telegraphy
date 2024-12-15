@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Account Info{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="/static/js/api.js" defer></script>
+    <script src="/static/js/account_page.js" defer></script>
+    <style>
+        #cards_page {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card_page {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border-radius: 10px;
+            margin: 5px 0px;
+            padding: 0 10px 10px 15px;
+            box-shadow: 0 0 30px 2px rgba(0, 0, 0, 0.105);
+            transition: all .3s;
+        }
+
+        .card_page:hover {
+            box-shadow: 0 0 30px 2px rgba(0, 0, 0, 0.203);
+        }
+
+        .card_page_td {
+            min-width: 150px;
+            max-width: 475px;
+        }
+        .card_page_bv {
+            max-width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card_page_bv > a {
+            all: unset;
+        }
+
+        .buttons {
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        .buttons > button {
+            margin: 21px 9px 0 !important;
+        }
+
+        [color_code="0"] {
+            background-color: rgb(247, 242, 255);
+        }
+
+        [color_code="1"] {
+            background-color: rgb(241, 249, 255);
+        }
+
+        [color_code="2"] {
+            background-color: rgb(245, 255, 240);
+        }
+    </style>
+{% endblock %}
+    
+{% block content %}
+    <div id="content_info">
+        <h1 id="title">Account Info</h1>
+    </div>
+    <article>
+        <div id="content_payload">
+            <div class="buttons">
+                <button onclick="window.open('/', '_blank')">Create Page</button>
+                <button onclick="window.location.href='/auth'">Auth By Token</button>
+            </div>
+            <br>
+            <hr>
+            <div id="cards_page">
+            </div>
+            <br>
+            <div class="buttons", style="margin: 0 auto; max-width: fit-content;">
+                <button id="load-next" disabled>Load...</button>
+            </div>
+        </div>
+    </article>
+{% endblock %}

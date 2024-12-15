@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="https://cdn.quilljs.com/1.3.7/quill.min.js" defer></script>
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+    <script src="/static/js/api.js" defer></script>
+    <script src="/static/js/view_page.js" defer></script>
+    <!-- meta -->
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="MobileOptimized" content="176">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="{{ image_url }}">
+    <meta property="og:site_name" content="Telegraphy">
+    <meta property="article:published_time" content="{{ created.isoformat() }}">
+    <meta property="article:author" content="{{ author_name }}">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="{{ image_url }}">
+
+{% endblock %}
+    
+{% block content %}
+    <div id="content_info">
+        <h1 id="title">{{ title }}</h1>
+        <address>
+            <a href="{{ author_url or ''}}" rel="author" id="author">{{ author_name }}</a>
+            •
+            <time datetime="{{ created.isoformat() }}">{{ created.strftime("%B %d, %Y") }}</time>
+            <div id="link-input-block" style="display: none;">
+                <label>Your Link:</label>
+                <a id="link-input">{{ author_url or '...'}}</a>
+            </div>
+        </address>
+    </div>
+    <div class="buttons top">
+        <div class="buttons top">
+            <button id="edit-html" disabled>Edit</button>
+            <button id="save-html" style="display: none;" disabled>Save</button>
+            <button id="save-profile" style="display: none;" disabled>Update Profile</button>
+            <button id="delete-html" class="delete-btn" style="display: none;" disabled>Delete</button>
+        </div>
+        <a href="/account" target="_blank" style="all: unset; cursor: pointer;">
+            <div class="buttons">
+                <button id="account-btn" class="info-btn">My Account</button>
+            </div>
+        </a>
+    </div>
+    
+    <article>
+        <div id="content_payload">
+            {{ html_content|safe }}
+        </div>
+    </article>
+{% endblock %}

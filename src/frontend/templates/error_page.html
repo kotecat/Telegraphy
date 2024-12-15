@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="/static/js/api.js" defer></script>
+    <script src="/static/js/error_page.js" defer></script>
+{% endblock %}
+    
+{% block content %}
+    <div id="content_info">
+        <h1 id="title">{{ title }}</h1>
+    </div>
+    <article>
+        <div id="content_payload">
+            <i>{{ err_description }}</i>
+            <a href="/">
+                <div class="buttons">
+                    <button>{{ button_text }}</button>
+                </div>
+            </a>
+        </div>
+    </article>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Auth By Token{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="/static/js/api.js" defer></script>
+    <script src="/static/js/auth_page.js" defer></script>
+{% endblock %}
+    
+{% block content %}
+    <div id="content_info">
+        <h1 id="title">Auth By Token :></h1>
+    </div>
+    <article>
+        <div id="content_payload">
+            <p>I <u>strongly recommend</u> that you save your current token by copying it using the "Copy Current" button.
+                This is because it will be overwritten in your browser or if you reset your browser, you may lose access to your account.</p>
+            <hr>
+            <p>Я <u>настоятельно рекомендую</u> вам сохранить ваш текущий токен, скопировав его с помощью кнопки «Копировать текущий».
+                Это связано с тем, что он будет перезаписан в вашем браузере или в случае сброса браузера вы можете потеряеть доступ к своей учетной записи.</p>
+            <br>
+            <div class="input_block">
+                <input type="password" id="input-token">
+                <div class="buttons">
+                    <button id="auth-token">Auth</button>
+                    <button id="copy-token">Copy Current</button>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}
