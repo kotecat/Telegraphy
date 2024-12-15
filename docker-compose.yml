@@ -1,0 +1,8 @@
+services:
+  telegraphy:
+    image: kotecat/telegraphy:latest
+    restart: always
+    env_file: .env
+    network_mode: host
+    volumes:
+      - /var/lib/telegraphy:/var/lib/telegraphy

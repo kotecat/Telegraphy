@@ -14,8 +14,9 @@ SERVER_PORT=8085
 SERVER_WORKERS=4
 
 # DATABASE
+# IF with docker -> :////var/lib/telegrapy/
+# ELSE -> any
 DB_URL=sqlite+aiosqlite:////var/lib/telegrapy/db.sqlite3
-# DB_URL=sqlite+aiosqlite:///telegrapy.db
 
 # IF SERVER DATABASE
 DB_POOL_SIZE=100
