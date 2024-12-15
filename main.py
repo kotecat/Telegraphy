@@ -78,12 +78,12 @@ def init_application() -> FastAPI:
     return app
 
 
-telegrapy_app: FastAPI = init_application()
+telegraphy_app: FastAPI = init_application()
 
 
 if __name__ == "__main__": 
     uvicorn.run(
-        "main:telegrapy_app",
+        "main:telegraphy_app",
         host=app_config.SERVER_HOST,
         port=app_config.SERVER_PORT,
         reload=app_config.APP_DEBUG,
