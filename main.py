@@ -1,4 +1,5 @@
 import logging
+from typing import AsyncGenerator
 
 import uvicorn
 from fastapi import FastAPI, Request
@@ -18,7 +19,7 @@ logging.basicConfig(level=app_config.LOGGING_LEVEL)
 logger = logging.getLogger(__name__)
 
 
-async def on_startup() -> None:
+async def lifespan(app: FastAPI) -> AsyncGenerator:
     async with async_db.async_session() as db:
         logger.info("Getting admin token...")
         r = await db.execute(
@@ -39,6 +40,8 @@ async def on_startup() -> None:
         logger.info("=-=-=-=-=-=-=")
         logger.info(f"ADMIN TOKEN: {acc.token}")
         logger.info("=-=-=-=-=-=-=\n")
+    yield
+    logger.info("Stopping...")
 
 
 def init_application() -> FastAPI:
@@ -48,7 +51,7 @@ def init_application() -> FastAPI:
         description=app_config.TITLE,
         docs_url='/docs' if app_config.API_DOCS else None,
         redoc_url='/redoc' if app_config.API_DOCS else None,
-        on_startup=[on_startup]
+        lifespan=lifespan
     )
     
     app.include_router(api.router)
