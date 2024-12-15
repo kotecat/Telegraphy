@@ -1,6 +1,6 @@
 services:
   telegraphy:
-    image: kotecat/telegraphy:latest
+    image: telegraphy:latest
     restart: always
     env_file: .env
     network_mode: host
