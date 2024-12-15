@@ -168,7 +168,7 @@ document.getElementById('save-html').addEventListener('click', () => {
             )
             saveBtn.disabled = false;
             if (r) {
-                const url = `${window.location.protocol}//${window.location.hostname}/${r.path}`;
+                const url = `${window.location.origin}/${r.path}`;
                 window.location.href = url;
             } else {
                 alert("Error (see logs)");
@@ -223,7 +223,7 @@ document.getElementById('delete-html').addEventListener('click', () => {
 
             if (r) {
                 document.body.innerHTML = "";
-                const url = `${window.location.protocol}//${window.location.hostname}/${pageUri}`;
+                const url = `${window.location.origin}/${pageUri}`;
                 window.location.href = url;
             } else {
                 alert("Error (see logs)");
