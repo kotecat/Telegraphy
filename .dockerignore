@@ -1,0 +1,14 @@
+**/node_modules
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env*
+*.db
+*.sqlite3
+*.sqlite
+*.db-journal
+*.sqlite3-journal
+*.sqlite-journal
+*.log
+.venv
