@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
     create_async_engine
 )
-from sqlalchemy.pool import Pool, QueuePool
+from sqlalchemy.pool import AsyncAdaptedQueuePool
 from src.config import app_config
 
 
@@ -25,7 +25,7 @@ class AsyncDatabase:
                 pool_size=app_config.DB_POOL_SIZE,
                 max_overflow=app_config.DB_POOL_OVERFLOW,
                 pool_timeout=app_config.DB_TIMEOUT,
-                poolclass=QueuePool
+                poolclass=AsyncAdaptedQueuePool
             )
         
         self.async_session = async_sessionmaker(
