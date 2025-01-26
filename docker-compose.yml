@@ -1,8 +1,11 @@
 services:
   telegraphy:
     image: telegraphy:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
-    env_file: .env
     network_mode: host
+    env_file: .env
     volumes:
       - /var/lib/telegraphy:/var/lib/telegraphy

@@ -1,5 +1,5 @@
 **/node_modules
-__pycache__
+__pycache__/
 *.pyc
 *.pyo
 *.pyd
@@ -11,4 +11,8 @@ __pycache__
 *.sqlite3-journal
 *.sqlite-journal
 *.log
-.venv
+.venv/
+.git/
+.gitignore
+LICENSE
+README.md
