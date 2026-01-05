@@ -19,6 +19,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="{{ image_url }}">
     <meta property="og:site_name" content="Telegraphy">
+    <meta property="tg:site_verification" content="g7j8/rPFXfhyrq5q0QQV7EsYWv4=">
     <meta property="article:published_time" content="{{ created.isoformat() }}">
     <meta property="article:author" content="{{ author_name }}">
 
@@ -56,9 +57,9 @@
         </a>
     </div>
     
-    <article>
-        <div id="content_payload">
+    <div class="article">
+        <article id="content_payload" class="article__content">
             {{ html_content|safe }}
-        </div>
-    </article>
+        </article>
+    </div>
 {% endblock %}
